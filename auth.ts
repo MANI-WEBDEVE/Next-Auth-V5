@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import UserModel from "./Schemas/userModel";
 import bcrypt from "bcryptjs";
+import { connectDB } from "./lib/connectDB";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -32,6 +33,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         } else if (!password) {
           throw new Error("Password is required")
         }
+        await connectDB();
         const user = await UserModel.findOne({email}).select('+password')
         if (!user) {
           throw new Error("User not found")
