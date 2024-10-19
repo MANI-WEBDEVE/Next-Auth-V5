@@ -12,7 +12,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.GOOGLE_SECRET,
     }),
     CredentialsProvider({
-      name: "Credentials",
+      name: "credentials",
       credentials: {
         email: {
           label: "Email",
@@ -28,6 +28,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       authorize: async (credentials) => {
         const email = credentials?.email as string | undefined
         const password = credentials?.password as string | undefined
+        console.log({email, password})
         if (!email) {
           throw new Error("Email is required")
         } else if (!password) {
@@ -44,13 +45,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (!isPasswordCorrect) {
           throw new Error("Invalid email or Password")
         }
-
-
-          return {name:user.name, email:user.email, id:user.id}
+         return {name:user.name, email:user.email, id:user.id}
       },
     }),
-  ],
-  pages: {
-    signIn: '/auth/signin',  // Optional: customize the sign-in page
-  },
+  ]
 });

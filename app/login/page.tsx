@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc"; 
 import { SignUp } from "@/action/SignUp";
+import { Login } from "@/action/Login";
 // import UserModel from "@/Schemas/userModel";
 // // import { useToast } from "@/hooks/use-toast";
 // import { connectDB } from "@/lib/connectDB";
@@ -35,19 +36,19 @@ const page = () => {
                 <CardDescription></CardDescription>
               </CardHeader>
               <CardContent>
-                <form>
+                <form action={Login}>
                   <div className="flex items-center justify-center gap-4 flex-col">
-                    <Input placeholder="Enter Your Email" />
-                    <Input placeholder="Enter Your Password" />
+                    <Input placeholder="Enter Your Email" name="email" />
+                    <Input placeholder="Enter Your Password" name="password"/>
                   </div>
                   <div className="mt-3">
-                    <Button className="w-full">Login</Button>
+                    <Button className="w-full" type="submit">Login</Button>
                   </div>
                 </form>
                 <div className="mt-2 text-center mb-2 font-medium">OR</div>
-                <form>
+                <form >
                   <div className="mt-3 flex ">
-                    <Button
+                    <Button 
                       variant={"outline"}
                       className="w-full bg-blue- font-medium text-md hover:bg-blue-500 transition-all duration-500"
                     >
